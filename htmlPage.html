@@ -1,1 +1,85 @@
-#test
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Intelligent Interactive Systems - Intent First</title>
+    <link rel = "stylesheet" href = "styles.css">
+    <script src = "core.js" defer></script>
+    <script src = "app.js" defer></script>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Intent First</h1>
+            <p>Choose your response, then check the wording.</p>
+            <p class = "small">Prototype: These are already-prepared suggestions, no real messages are sent.</p>
+        </header>
+
+        <div class = "examples">
+            <span class = "label">Example: </span>
+            <div id = "scenarios"></div>
+        </div>
+
+        <section>
+            <h2 id = "message-heading">Message from Mother</h2>
+            <div class = "message" id = "incoming-message"></div>
+        </section>
+
+        <section id = "reply-flow">
+            <fieldset>
+                <legend>Your response</legend>
+                <div class = "intentions">
+                    <label><input type = "radio" name = "intention" value = "yes">Yes</label>
+                    <label><input type = "radio" name = "intention" value = "no">No</label>
+                    <label><input type = "radio" name = "intention" value = "clarify">Require more information</label>
+                </div>
+            </fieldset>
+
+            <label for = "extra-details" class = "field-label"> Extra wording (optional)</label>
+            <textarea id = "extra-details" rows = "2" maxlength = "500" aria-describedby = "details-help"></textarea>
+            <p id = "details-help" class = "small">This will be added as it is written, but you can edit the full reply after.</p>
+
+            <div class = "actions">
+                <button id = "generate" type = "button">Create a suggestion</button>
+                <button id = "manual" type = "button">Write manually</button>
+            </div>
+            <p id = "generation-error" role="alert" hidden>Choose a response first, or write manually</p>
+
+            <section id = "draft-panel" hidden>
+                <h2 id = "draft-heading">Check your reply</h2>
+                <p id = "draft-context" class = "small"></p>
+                <div id = "stale-warning" role="status" hidden>
+                    <strong>Your inputs have changed.</strong>
+                    <p>Update the suggestion or keep this draft as a manual reply.</p>
+                    <button id = "keep-manual" type = "button">Keep as manual reply</button>
+                </div>
+                <label for = "draft" class = "field-label">Reply wording</label>
+                <textarea id = "draft" rows = "4" maxlength = "2000" aria-describedby = "review-help"></textarea>
+                <p id = "review-help" class = "small">Please check that the decision and details say what you intend.</p>
+                <div class = "actions">
+                    <button id = "confirm" type = "button">Confirm reply</button>
+                    <button id = "discard" type = "button">Discard reply</button>
+                </div>
+            </section>
+        </section>
+
+        <section id = "completion" hidden>
+            <h2 id = "confirmed-heading">Your confirmed reply</h2>
+            <div class = "message" id = "outgoing-message"></div>
+            <p>Confirmed, nothing was sent.</p>
+            <button id = "restart" type = "button">Start again</button>
+        </section>
+    </main>
+    <dialog id = "change-dialog">
+        <form method = "dialog">
+            <h2 id = "dialog-title">Replace this draft?</h2>
+            <p id = "dialog-description"></p>
+            <div class = "actions">
+                <button value = "cancel">Keep working</button>
+                <button value = "proceed" id = "dialog-proceed">Continue</button>
+            </div>
+        </form>
+    </dialog>
+</body>
+</html>
